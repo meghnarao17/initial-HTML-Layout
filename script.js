@@ -8,7 +8,7 @@
 
 async function mainEvent() { // the async keyword means we can make API requests
     const mainForm = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
-    const filterButton = document.querySelector('.filter_button');
+    const visualization = document.querySelector('.visualization');
     let currentList = []; 
     mainForm.addEventListener('submit', async (submitEvent) => {
         submitEvent.preventDefault(); 
@@ -19,8 +19,8 @@ async function mainEvent() { // the async keyword means we can make API requests
         console.table(currentList); 
   });
 
-//   filterButton.addEventListener('click', (event) =>{
-//     console.log('clicked FilterButton');
+  visualization.addEventListener('click', (event) =>{
+     console.log('clicked FilterButton');
 
 //     const formData = new FormData(mainForm);
 //     const formProps = Object.fromEntries(formData);
@@ -29,7 +29,7 @@ async function mainEvent() { // the async keyword means we can make API requests
 //     const newList = filterList(currentList, formProps.resto);
     
 //     console.log(newList);
-//   });
+  });
     
 
 }
