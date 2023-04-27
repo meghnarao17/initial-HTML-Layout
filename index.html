@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PG county spending information</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body> 
@@ -20,8 +21,10 @@
                         class="box main_form">
                         <div class="buttons">
                         <button type="submit">Load Data</button>
-                        <button type="button" class="visualization">Create Visualization</button>
-                    </div>
+                        </div>
+                        <div>
+                            <canvas id="myChart"></canvas>
+                        </div>
                     </form>
            </div>
            <div class="right_section box">
@@ -32,11 +35,11 @@
                         class="box main_form">
                         <div class="buttons">
                         <button type="submit">Load Data</button>
-                        <button type="button" class="visualization">Create Visualization</button>
                     </div>
                     </form> 
            </div>
         </div>     
     </div>
+    <script src="./script.js"></script>
 </body>
 </html>
