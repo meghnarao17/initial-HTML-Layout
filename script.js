@@ -1,4 +1,4 @@
-function initChart(){
+function initChart(chart){
     const labels = [
         'January',
         'February',
