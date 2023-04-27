@@ -15,13 +15,13 @@
         <header class="header"><h1>PG County Government Spending</h1></header>
         <div class="container">
            <div class="left_section box">
-                <h2>Government Spendiing by Frequency of Payments</h2>
+                <h2>Government Spending by Amount of Payments</h2>
                     <h3>Ranked by spending on agency by frequency of payments from highest to least </h3>
                     <form
-                        action="https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json"
+                        action="/api"
                         class="box main_form">
                         <div class="buttons">
-                        <button type="submit">Load Data</button>
+                        <button type="submit" id="form_button">Load Data</button>
                         </div>
                         <div class="chart_container">
                             <canvas id="myChart"></canvas>
@@ -29,14 +29,9 @@
                     </form>
            </div>
            <div class="right_section box">
-                <h2>Government Spending By Amount of Payments</h2>
-                    <h3>Ranked by spending on agency by payment amount from highest to least</h3>
-                    <form
-                        action="https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json"
-                        class="box main_form">
-                        <div class="buttons">
-                        <button type="submit">Load Data</button>
-                    </div>
+                <h2>Visualizations of PG county govt spendings</h2>
+                <div class="box">
+                </div>
                     <div class="chart_container">
                         <canvas id="myChart"></canvas>
                     </div>
