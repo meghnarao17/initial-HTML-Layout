@@ -31,7 +31,7 @@ function initChart(chart){
 }
 
 
-async function mainEvent() { // the async keyword means we can make API requests
+async function mainEvent() { // API request
     const form = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
     const submit = document.querySelector('#form_button')
     const chartTarget = document.querySelector('#myChart');
