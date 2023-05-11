@@ -1,4 +1,12 @@
 
+function groupCategory(list){
+  let item = list.getGroups()
+   item.forEach((item)=>{
+    let category = item.getKey();
+    console.log(category)
+  });
+}
+
 
 function getRandomIntInclusive(min, max){
   min = Math.ceil(min);
