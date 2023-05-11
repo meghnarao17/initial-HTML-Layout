@@ -42,7 +42,6 @@ function injectHTML(list) {
   target.innerHTML = '';
   list.forEach((item) => {
     const str = `<li>${item.payee_name}</li>`;
-    console.log('here:'+ str)
     target.innerHTML += str
   })
 }
