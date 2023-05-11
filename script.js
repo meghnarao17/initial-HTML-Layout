@@ -1,34 +1,34 @@
-function initChart(chart){
-    const labels = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-      ];
+// function initChart(chart){
+//     const labels = [
+//         'January',
+//         'February',
+//         'March',
+//         'April',
+//         'May',
+//         'June',
+//       ];
     
-      const data = {
-        labels: labels,
-        datasets: [{
-          label: 'My First dataset',
-          backgroundColor: 'rgb(255, 99, 132)',
-          borderColor: 'rgb(255, 99, 132)',
-          data: [0, 10, 5, 2, 20, 30, 45],
-        }]
-      };
+//       const data = {
+//         labels: labels,
+//         datasets: [{
+//           label: 'My First dataset',
+//           backgroundColor: 'rgb(255, 99, 132)',
+//           borderColor: 'rgb(255, 99, 132)',
+//           data: [0, 10, 5, 2, 20, 30, 45],
+//         }]
+//       };
     
-      const config = {
-        type: 'line',
-        data: data,
-        options: {}
-      };
+//       const config = {
+//         type: 'line',
+//         data: data,
+//         options: {}
+//       };
 
-      return new Chart(
-        chart,
-        config
-      );
-}
+//       return new Chart(
+//         chart,
+//         config
+//       );
+// }
 
 function getRandomIntInclusive(min, max){
   min = Math.ceil(min);
@@ -82,7 +82,7 @@ async function mainEvent() { // API request
       loadAnimation.style.display = 'inline-block';
     
 
-      initChart(chartTarget);
+     // initChart(chartTarget);
     /* API data request */
       const results = await fetch('https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json');
       
