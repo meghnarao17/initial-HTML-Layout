@@ -18,21 +18,25 @@
                 <h2>Government Spending by Amount of Payments</h2>
                     <h3>Ranked by spending on agency by frequency of payments from highest to least </h3>
                     <form
-                        action="/api"
+                        action="https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json"
                         class="box main_form">
-                        <div class="buttons">
-                        <button type="submit" id="form_button">Load Data</button>
-                        </div>
-                        <div class="chart_container">
-                            <canvas id="myChart"></canvas>
-                        </div>
+                        <button type="button" id="data_load">Load Data</button>
+                    <div>
+                        <label for="agency">Agency Name</label>
+                        <input type="text" id="agency" name="agency">
+                    </div>
+                    <div class="buttons">
+                        <button type="button" id="filter">Filter Data</button>
+                        <button type="button" id="generate">Generate List</button>
+                    </div>
                     </form>
            </div>
            <div class="right_section box">
-                <h2>Visualizations of PG county govt spendings</h2>
-                    <div class="chart_container">
-                        <canvas id="myChart"></canvas>
-                    </div>
+                <h2>List of PG County Agency Funding</h2>
+                <ol class="box" id="agency_list">
+                    A List of PG County Agencies
+                </ol>
+                <div class="lds-ellipsis" id="data_load_animation"><div></div><div></div><div></div><div></div></div>
            </div>
         </div>     
     </div>
