@@ -69,7 +69,7 @@ async function mainEvent() { // API request
     const filterDataButton = document.querySelector('#filter');
     const loadDataButton = document.querySelector('#data_load');
     const generateListButton = document.querySelector('#generate');
-    const chartTarget = document.querySelector('#myChart');
+    //const chartTarget = document.querySelector('#myChart');
     
 
     const loadAnimation = document.querySelector('#data_load_animation');
