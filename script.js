@@ -33,7 +33,7 @@ function cutAgencyList(list) {
   })
 }
 
-function initChart(){
+function initChart(chart){
   const labels = [
     'January',
     'February',
