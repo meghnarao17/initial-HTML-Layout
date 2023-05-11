@@ -41,7 +41,8 @@ function injectHTML(list) {
   const target = document.querySelector('#agency_list')
   target.innerHTML = '';
   list.forEach((item) => {
-    const str = `<li>${item.name}</li>`;
+    const str = `<li>${item.payee_name}</li>`;
+    console.log('here:'+ str)
     target.innerHTML += str
   })
 }
