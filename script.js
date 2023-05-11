@@ -38,7 +38,7 @@ function getRandomIntInclusive(min, max){
 
 function injectHTML(list) {
   console.log('fired injectHTML')
-  const target = document.querySelector('#restaurant_list')
+  const target = document.querySelector('#agency_list')
   target.innerHTML = '';
   list.forEach((item) => {
     const str = `<li>${item.name}</li>`;
@@ -54,7 +54,7 @@ function filterList(list, query) {
   });
 }
 
-function cutRestaurantList(list) {
+function cutAgencyList(list) {
   console.log('fired cut list');
   const range = [...Array(15).keys()]
   return newArray = range.map((item) => {
@@ -101,16 +101,16 @@ async function mainEvent() { // API request
       const formProps = Object.fromEntries(formData);
   
       console.log(formProps);
-      const newList = filterList(currentList, formProps.resto);
+      const newList = filterList(currentList, formProps.agency);
       console.log(newList);
       injectHTML(newList);
     });
 
     generateListButton.addEventListener('click', (event) => {
       console.log('generate new list');
-      const restaurantsList = cutRestaurantList(currentList);
-      console.log(restaurantsList);
-      injectHTML(restaurantsList);
+      const agencyList = cutAgencyList(currentList);
+      console.log(agencyList);
+      injectHTML(agencyList);
       
   });
     
@@ -119,9 +119,7 @@ async function mainEvent() { // API request
     
     
     
-      if (arrayFromJson.data.length > 0) {
-        submit.style.display = 'block';
-    }
+     
 
 document.addEventListener('DOMContentLoaded', async () => mainEvent()); // the async keyword means we can make API requests
     
