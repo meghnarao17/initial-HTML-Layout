@@ -1,16 +1,30 @@
 
-function sumAgency(agency, data) {
-  let tot = 0;
-  data.forEach((item) => {
-    if (item.agency === agency) {
-      tot += 1;
-      console.log("HERE" + tot)
+function sumAgency(array, category) {
+  return array.reduce((collection, item) => {
+    const key = item.agency[category];
+    if(!collection[key]) {
+      collection[key] = [];
     }
-  });
-  return tot;
+    collection[key].push(item.agency);
+    return collection;
+  })
   
 }
 
+  // var result = [];
+  // array.reduce(function agencyAmount(res, value) {
+  //   if (!res[value.item.agency]) {
+  //     res[value.item.agency] = { agency: value.item.agency, amount: 0 };
+  //     result.push(res[value.item.agency])
+  //   }
+  //   res[value.item.agency].item.amount += value.item.amount;
+  //   return res;
+  // }, {});
+
+
+function getMaxAgencies(){
+  //sorts agency in decreasing order
+}
 
 function getRandomIntInclusive(min, max){
   min = Math.ceil(min);
@@ -76,6 +90,13 @@ function initChart(chart){
   );
 }
 
+async function getData(){
+      const url = 'https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json';
+      const data= await fetch(url);
+      const json = await data.json()
+      const reply = json.filter((item) => Boolean(item.amount)).filter((item) => Boolean(item.name))
+      return reply;
+  }
 
 async function mainEvent() { // API request
     const mainForm = document.querySelector('.main_form'); // This class name needs to be set on your form before you can listen for an event on it
@@ -83,18 +104,43 @@ async function mainEvent() { // API request
     const loadDataButton = document.querySelector('#data_load');
     const generateListButton = document.querySelector('#generate');
     const chartTarget = document.querySelector('#myChart');
+    submit.style.display = 'none';
     
-    const numAgencyType = [];
-    for (let i = 1; i < agency.length - 1; i++) {
-    numAgencyType.push(sumAgency(i, list));
+    initChart(chartTarget);
+    const chartData = await getData();
+
+    if(chartData.length > 0){
+      submit.style.display = 'block';
+
+      loadAnimation.classList.remove('lds-ellipsis');
+      loadAnimation.classList.add('lds-ellipsis_hidden');
+
+      let currentList = [];
+
+      form.addEventListener('input', (event) => {
+        console.log(event.target.value);
+        const filteredList = filterList(currentList, event.target.value);
+        injectHTML(filteredList);
+      });
+
+      form.addEventListener('submit', async(submitEvent) => {
+        submitEvent.preventDefault();
+
+        //VALUE of current collection (sorted agencies)
+        currentList = cutAgencyList(chartData);
+
+        injectHTML(currentList);
+      })
+
+
+
+
     }
 
-    console.log("HERE" + numAgencyType);
-    
     const loadAnimation = document.querySelector('#data_load_animation');
     loadAnimation.style.display = 'none';
 
-    let currentList = []; // this is "scoped" to the main event function
+     // this is "scoped" to the main event function
     
     loadDataButton.addEventListener('click', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
       console.log('Loading Data'); 
@@ -106,7 +152,14 @@ async function mainEvent() { // API request
       const results = await fetch('https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json');
       currentList = await results.json();
 
-      initChart(chartTarget);
+      const numAgencyType = [];
+    for (let i = 1; i < agency.length - 1; i++) {
+    numAgencyType.push(sumAgency(i, list));
+    }
+
+    console.log("HERE" + numAgencyType);
+
+     
 
       loadAnimation.style.display = 'none';
       console.table(currentList); 
