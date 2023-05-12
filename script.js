@@ -21,6 +21,36 @@ function sumAgency(array, category) {
   //   return res;
   // }, {});
 
+function shapeDataForLineChart(array){
+  //reduce can restructrure an array of information
+  //collection is the thing you are building out of the array
+  //1) check of collection already has a refernce to item in it (so if collection doesnt have an item with this category)
+  //2) then collection with key of agency, is now defined , and now we are gonna set it equal to an array in which first element of array is item were preoviding
+  //3) else we're going to push item we're working on into the collection at that key
+  //4) if agency does exist, were gonna push the item into that key to make a new array of all the agencies in our dataset
+
+  return array.reduce((collection, item) => {
+    if(!collection[item.agency]){
+    collection[item.agency] = [item]
+    } else {
+      collection[item.agency].push(item);
+    }
+    return collection;
+  }, {});
+}
+
+function Yshape(collection){
+  for(let i = 0; i < collection.length; i++){
+    let sum = 0
+    for(let x = 0; x< collection[i].length; x++ ){
+      sum += collection[i]["amount"]
+      //test out with item
+    }
+  }
+  //create an array to assign each value to agency
+  
+}
+
 
 function getMaxAgencies(){
   //sorts agency in decreasing order
@@ -89,6 +119,7 @@ function initChart(chart){
     config
   );
 }
+
 
 async function getData(){
       const url = 'https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json';
