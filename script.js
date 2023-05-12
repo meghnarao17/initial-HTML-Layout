@@ -84,8 +84,13 @@ async function mainEvent() { // API request
     const generateListButton = document.querySelector('#generate');
     const chartTarget = document.querySelector('#myChart');
     
-    
+    const numAgencyType = [];
+    for (let i = 1; i < agency.length - 1; i++) {
+    numAgencyType.push(sumAgency(i, list));
+    }
 
+    console.log("HERE" + numAgencyType);
+    
     const loadAnimation = document.querySelector('#data_load_animation');
     loadAnimation.style.display = 'none';
 
