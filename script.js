@@ -1,10 +1,13 @@
 
-function groupCategory(list){
-  let item = list.getGroups()
-   item.forEach((item)=>{
-    let category = item.getKey();
-    console.log("RIGHT HERE" + category)
+function sumAgency(agency, data) {
+  let tot = 0;
+  data.forEach((item) => {
+    if (item.agency === agency) {
+      tot += 1;
+    }
   });
+  return tot;
+  console.log("HERE" + tot)
 }
 
 
