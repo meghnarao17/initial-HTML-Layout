@@ -4,10 +4,11 @@ function sumAgency(agency, data) {
   data.forEach((item) => {
     if (item.agency === agency) {
       tot += 1;
+      console.log("HERE" + tot)
     }
   });
   return tot;
-  console.log("HERE" + tot)
+  
 }
 
 
