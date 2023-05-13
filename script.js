@@ -152,7 +152,7 @@ async function mainEvent() { // API request
       
 
         //VALUE of current collection (sorted agencies)
-    currentList = cutAgencyList(chartData);
+    //currentList = cutAgencyList(chartData);
     loadAnimation.style.display = 'none';
     console.table(currentList); 
     injectHTML(currentList);
