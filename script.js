@@ -109,7 +109,7 @@ function agencySum(response) {
     agencyGroup[agency].rows.push(item);
   }
 
-  const sums = object.values(agencyGroup).map(group => group.sum);
+  const sums = Object.values(agencyGroup).map(group => group.sum);
 
   return {agencyGroup, sums};
 }
