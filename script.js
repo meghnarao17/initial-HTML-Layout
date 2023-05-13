@@ -168,7 +168,7 @@ async function mainEvent() { // API request
     const response = await results.json()
     currentList = response
     
-    const {agencyGroup, sums} = agencyGroups(response);
+    const {agencyGroup, sums} = agencySum(response);
     const agencies = Object.keys(agencyGroup)
     initChart(agencies, sums);
 
