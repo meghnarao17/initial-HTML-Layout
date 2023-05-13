@@ -151,7 +151,7 @@ async function mainEvent() { // API request
     currentList = await results.json();
       
 
-        //VALUE of current collection (sorted agencies)
+    
     //currentList = cutAgencyList(chartData);
     loadAnimation.style.display = 'none';
     console.table(currentList); 
