@@ -1,44 +1,3 @@
-
-function sumAgency(array, category) {
-  return array.reduce((collection, item) => {
-    const key = item.agency[category];
-    if(!collection[key]) {
-      collection[key] = [];
-    }
-    collection[key].push(item.agency);
-    return collection;
-  })
-  
-}
-
-  // var result = [];
-  // array.reduce(function agencyAmount(res, value) {
-  //   if (!res[value.item.agency]) {
-  //     res[value.item.agency] = { agency: value.item.agency, amount: 0 };
-  //     result.push(res[value.item.agency])
-  //   }
-  //   res[value.item.agency].item.amount += value.item.amount;
-  //   return res;
-  // }, {});
-
-//POSSIBLY DELETE
-function Yshape(collection){
-  for(let i = 0; i < collection.length; i++){
-    let sum = 0
-    for(let x = 0; x< collection[i].length; x++ ){
-      sum += collection[i]["amount"]
-      //test out with item
-    }
-  }
-  //create an array to assign each value to agency
-  
-}
-
-
-function getMaxAgencies(){
-  //sorts agency in decreasing order
-}
-
 function getRandomIntInclusive(min, max){
   min = Math.ceil(min);
   max = Math.floor(max); 
@@ -72,7 +31,37 @@ function cutAgencyList(list) {
   })
 }
 
-function initChart(chart){
+
+function initChart(collection){
+  const agencies = Object.keys(collection);
+  const sums = agencies.map(agency => collection[agency].sum)
+
+  const ctx = document.getElementById('barChart').getContext('2d');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: agencies,
+      datasets: [{
+        label: 'Sums',
+        data: sums,
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+}
+
+function finitChart(chart){
   const labels = [
     'January',
     'February',
@@ -102,6 +91,30 @@ function initChart(chart){
     config
   );
 }
+
+function agencySum(response) {
+  const agencyGroup = {};
+
+  for(const item of response){
+    const {agency, amount} = item;
+
+    if(!agencyGroup[agency]){
+      agencyGroup[agency] = {
+        sum: 0,
+        rows: [],
+      };
+    }
+
+    agencyGroup[agency].sum += amount;
+    agencyGroup[agency].rows.push(item);
+  }
+
+  return agencyGroup;
+}
+
+
+
+
 
 function shapeDataForLineChart(array){
   return array.reduce((collection, item) => {
@@ -133,11 +146,13 @@ async function mainEvent() { // API request
     const loadAnimation = document.querySelector('#data_load_animation');
     loadAnimation.style.display = 'none';
 
+   
+
 
     const chartData = await getData();
     const shapedData = shapeDataForLineChart(chartData);
     console.log("HERE" + shapedData)
-    const myChart = initChart(chartTarget, shapedData);
+    //const myChart = initChart(chartTarget, shapedData);
     
 
     let currentList = [];
@@ -148,8 +163,11 @@ async function mainEvent() { // API request
 
     /* API data request */
     const results = await fetch('https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json');
-    currentList = await results.json();
-      
+    const response = await results.json()
+    currentList = response
+    
+    const agencyGroups = agencySum(response);
+    initChart(agencyGroups);
 
     
     //currentList = cutAgencyList(chartData);
