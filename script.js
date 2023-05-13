@@ -35,7 +35,7 @@ function cutAgencyList(list) {
 function groupAgency(response){
   const groupedAgency = {};
 
-  for(const value of response){
+  for(const item of response){
     const {agency} = item;
 
     if(!groupedAgency[agency]){
