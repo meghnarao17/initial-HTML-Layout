@@ -133,7 +133,7 @@ async function mainEvent() { // API request
     
     const chartData = await getData();
     const shapedData = shapeDataForLineChart(chartData);
-    console.log(shapedData)
+    console.log("HERE" + shapedData)
     const myChart = initChart(chartTarget, shapedData);
     
     
