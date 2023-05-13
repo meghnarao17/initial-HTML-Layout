@@ -57,7 +57,7 @@ function injectHTML(list) {
 
 function filterList(list, query) {
   return list.filter((item) => {
-    const lowerCaseName = item.payee_name.toLowerCase();
+    const lowerCaseName = item.agency.toLowerCase();
     const lowerCaseQuery = query.toLowerCase();
     return lowerCaseName.includes(lowerCaseQuery);
   });
