@@ -92,15 +92,9 @@ function createBarChart(agencies, values){
 
 
 
-function finitChart(chart){
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-  ];
+function initChart(chart, object){
+  const labels = Object.keys(object);
+  const info = Object.keys(object).map((item) => object[item].length);
 
   const data = {
     labels: labels,
@@ -108,7 +102,7 @@ function finitChart(chart){
       label: 'My First dataset',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
-      data: [0, 10, 5, 2, 20, 30, 45],
+      data: info,
     }]
   };
 
@@ -159,10 +153,10 @@ async function mainEvent() { // API request
    
 
 
-    //const chartData = await getData();
-    //const shapedData = shapeDataForLineChart(chartData);
+    const chartData = await getData();
+    const shapedData = shapeDataForLineChart(chartData);
     //console.log("HERE" + shapedData)
-    //const myChart = initChart(chartTarget, shapedData);
+    const myChart = initChart(chartTarget, shapedData);
     
 
     let currentList = [];
@@ -179,7 +173,7 @@ async function mainEvent() { // API request
     const sums = sumValues(groupedAgency);
     const agencies = Object.keys(sums);
     const values = Object.values(sums);
-    createBarChart(agencies, values);
+    //createBarChart(agencies, values);
     
     
     currentList = response
