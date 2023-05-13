@@ -129,69 +129,38 @@ async function mainEvent() { // API request
     const loadDataButton = document.querySelector('#data_load');
     const generateListButton = document.querySelector('#generate');
     const chartTarget = document.querySelector('#myChart');
-    submit.style.display = 'none';
     
+    const loadAnimation = document.querySelector('#data_load_animation');
+    loadAnimation.style.display = 'none';
+
+
     const chartData = await getData();
     const shapedData = shapeDataForLineChart(chartData);
     console.log("HERE" + shapedData)
     const myChart = initChart(chartTarget, shapedData);
     
-    
-    
 
-    if(chartData.length > 0){
-      //show the submit button
-      submit.style.display = 'block';
+    let currentList = [];
 
-      loadAnimation.classList.remove('lds-ellipsis');
-      loadAnimation.classList.add('lds-ellipsis_hidden');
-
-      let currentList = [];
-
-      form.addEventListener('input', (event) => {
-        console.log(event.target.value);
-        const filteredList = filterList(currentList, event.target.value);
-        injectHTML(filteredList);
-      });
-
-      form.addEventListener('submit', async(submitEvent) => {
-        submitEvent.preventDefault();
-
-        //VALUE of current collection (sorted agencies)
-        currentList = cutAgencyList(chartData);
-
-        injectHTML(currentList);
-      })
-
-
-
-
-    }
-
-    const loadAnimation = document.querySelector('#data_load_animation');
-    loadAnimation.style.display = 'none';
-
-     // this is "scoped" to the main event function
-    
     loadDataButton.addEventListener('click', async (submitEvent) => { // async has to be declared on every function that needs to "await" something
       console.log('Loading Data'); 
       loadAnimation.style.display = 'inline-block';
-    
 
-     
     /* API data request */
-      const results = await fetch('https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json');
-      currentList = await results.json();
-
+    const results = await fetch('https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json');
+    currentList = await results.json();
       
 
-     
+        //VALUE of current collection (sorted agencies)
+    currentList = cutAgencyList(chartData);
+    loadAnimation.style.display = 'none';
+    console.table(currentList); 
+    injectHTML(currentList);
 
-      loadAnimation.style.display = 'none';
-      console.table(currentList); 
-      injectHTML(currentList);
-     });
+    
+  })
 
+    
      
      filterDataButton.addEventListener('click', (event) =>{
       console.log('clicked FilterButton');
