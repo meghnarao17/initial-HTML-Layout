@@ -107,7 +107,7 @@ function initChart(chart, object){
   };
 
   const config = {
-    type: 'bar',
+    type: 'doughnut',
     data: data,
     options: {}
   };
