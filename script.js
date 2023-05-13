@@ -65,30 +65,7 @@ function sumValues(groupedAgency){
   return sums;
 }
 
-function createBarChart(agencies, values){
-  const ctx = document.querySelector('barChart').getContext('2d');
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: agencies,
-      datasets: [{
-        label: 'Total Value',
-        data: values,
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-}
 
 
 
@@ -170,11 +147,7 @@ async function mainEvent() { // API request
     const results = await fetch('https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json');
     var response = await results.json()
     
-    const groupedAgency = groupAgency(response);
-    const sums = sumValues(groupedAgency);
-    const agencies = Object.keys(sums);
-    const values = Object.values(sums);
-    //createBarChart(agencies, values);
+    
     
     
     currentList = response
