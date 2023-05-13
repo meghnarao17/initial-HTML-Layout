@@ -50,14 +50,14 @@ function injectHTML(list) {
   const target = document.querySelector('#agency_list')
   target.innerHTML = '';
   list.forEach((item) => {
-    const str = `<li>${item.agency}</li>`;
+    const str = `<li>${item.payee_name}</li>`;
     target.innerHTML += str
   })
 }
 
 function filterList(list, query) {
   return list.filter((item) => {
-    const lowerCaseName = item.agency.toLowerCase();
+    const lowerCaseName = item.payee_name.toLowerCase();
     const lowerCaseQuery = query.toLowerCase();
     return lowerCaseName.includes(lowerCaseQuery);
   });
