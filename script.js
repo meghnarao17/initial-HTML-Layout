@@ -99,7 +99,7 @@ function initChart(chart, object){
   const data = {
     labels: labels,
     datasets: [{
-      label: 'My First dataset',
+      label: 'Frequency of PG County Spending by Agency',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: info,
