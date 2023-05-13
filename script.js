@@ -157,7 +157,7 @@ async function mainEvent() { // API request
     const shapedData = shapeDataForLineChart(chartData);
     const sumData = sumValues(chartData)
     //console.log("HERE" + shapedData)
-    const myChart = initChart(chartTarget, sumData);
+    const myChart = initChart(chartTarget, shapedData);
     
 
     let currentList = [];
