@@ -66,7 +66,7 @@ function sumValues(groupedAgency){
 }
 
 function createBarChart(agencies, values){
-  const ctx = document.getElementById('barChart').getContext('2d');
+  const ctx = document.querySelector('barChart').getContext('2d');
 
   new Chart(ctx, {
     type: 'bar',
