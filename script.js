@@ -32,10 +32,40 @@ function cutAgencyList(list) {
 }
 
 
-function initChart(agencies, sums){
-  //const agencies = Object.keys(collection);
-  //const sums = agencies.map(agency => collection[agency].sum)
+function groupAgency(response){
+  const groupedAgency = {};
 
+  for(const value of response){
+    const {agency} = item;
+
+    if(!groupedAgency[agency]){
+      groupedAgency[agency] = [];
+    }
+    groupedAgency[agency].push(item)
+  }
+  return groupedAgency;
+
+}
+
+function sumValues(groupedAgency){
+  const sums = {};
+
+  for(const agency in groupedAgency){
+    const rows = groupedAgency[agency];
+    let total = 0;
+
+    for(const item of rows){
+      total += item.amount;
+    }
+
+    sums[agency] = total;
+
+  }
+
+  return sums;
+}
+
+function createBarChart(agencies, values){
   const ctx = document.getElementById('barChart').getContext('2d');
 
   new Chart(ctx, {
@@ -43,8 +73,8 @@ function initChart(agencies, sums){
     data: {
       labels: agencies,
       datasets: [{
-        label: 'Sums',
-        data: sums,
+        label: 'Total Value',
+        data: values,
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1
@@ -58,8 +88,9 @@ function initChart(agencies, sums){
       }
     }
   });
-
 }
+
+
 
 function finitChart(chart){
   const labels = [
@@ -91,29 +122,6 @@ function finitChart(chart){
     config
   );
 }
-
-function agencySum(response) {
-  const agencyGroup = {};
-
-  for(const item of response){
-    const {agency, amount} = item;
-
-    if(!agencyGroup[agency]){
-      agencyGroup[agency] = {
-        sum: 0,
-        rows: [],
-      };
-    }
-
-    agencyGroup[agency].sum += amount;
-    agencyGroup[agency].rows.push(item);
-  }
-
-  const sums = Object.values(agencyGroup).map(group => group.sum);
-
-  return {agencyGroup, sums};
-}
-
 
 
 
@@ -151,9 +159,9 @@ async function mainEvent() { // API request
    
 
 
-    const chartData = await getData();
-    const shapedData = shapeDataForLineChart(chartData);
-    console.log("HERE" + shapedData)
+    //const chartData = await getData();
+    //const shapedData = shapeDataForLineChart(chartData);
+    //console.log("HERE" + shapedData)
     //const myChart = initChart(chartTarget, shapedData);
     
 
@@ -165,14 +173,16 @@ async function mainEvent() { // API request
 
     /* API data request */
     const results = await fetch('https://data.princegeorgescountymd.gov/resource/2qma-7ez9.json');
-    const response = await results.json()
+    var response = await results.json()
+    
+    const groupedAgency = groupAgency(response);
+    const sums = sumValues(groupedAgency);
+    const agencies = Object.keys(sums);
+    const values = Object.values(sums);
+    createBarChart(agencies, values);
+    
+    
     currentList = response
-    
-    const {agencyGroup, sums} = agencySum(response);
-    const agencies = Object.keys(agencyGroup)
-    initChart(agencies, sums);
-
-    
     //currentList = cutAgencyList(chartData);
     loadAnimation.style.display = 'none';
     console.table(currentList); 
