@@ -32,9 +32,9 @@ function cutAgencyList(list) {
 }
 
 
-function initChart(collection){
-  const agencies = Object.keys(collection);
-  const sums = agencies.map(agency => collection[agency].sum)
+function initChart(agencies, sums){
+  //const agencies = Object.keys(collection);
+  //const sums = agencies.map(agency => collection[agency].sum)
 
   const ctx = document.getElementById('barChart').getContext('2d');
 
@@ -109,7 +109,9 @@ function agencySum(response) {
     agencyGroup[agency].rows.push(item);
   }
 
-  return agencyGroup;
+  const sums = object.values(agencyGroup).map(group => group.sum);
+
+  return {agencyGroup, sums};
 }
 
 
@@ -166,8 +168,9 @@ async function mainEvent() { // API request
     const response = await results.json()
     currentList = response
     
-    const agencyGroups = agencySum(response);
-    initChart(agencyGroups);
+    const {agencyGroup, sums} = agencyGroups(response);
+    const agencies = Object.keys(agencyGroup)
+    initChart(agencies, sums);
 
     
     //currentList = cutAgencyList(chartData);
