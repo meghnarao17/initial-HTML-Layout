@@ -155,7 +155,7 @@ async function mainEvent() { // API request
 
     const chartData = await getData();
     const shapedData = shapeDataForLineChart(chartData);
-    const sumData = sumValues(chartData)
+    //const sumData = sumValues(chartData)
     //console.log("HERE" + shapedData)
     const myChart = initChart(chartTarget, shapedData);
     
